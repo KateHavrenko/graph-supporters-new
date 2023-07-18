@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Supporters UA</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <style>
+
+  </style>
+  <script type="text/javascript">
+
+
+    function fetchData() {
+      const queryString = encodeURIComponent('SELECT A, B LIMIT 20');
+      const data = 'https://docs.google.com/spreadsheets/d/10dDxCrIBO3qqlehe7AiQ0YjqQAKAM8jNGF-UhsGzOIU/gviz/tq?gid=0&headers=1&tq=' + queryString;
+
+
+      fetch(data)
+        .then(response => response.json())
+        // .then(data => {
+        //   data.sort((a, b) => b.quantity - a.quantity);
+        // })
+        .catch(error => console.error('Error fetching JSON:', error));
+    }
+
+
+    async function drawProgressBars(response) {
+      const data = await fetchData()
+      console.log(data, 'data')
+     
+    
+    }
+
+  </script>
+</head>
+
+<body>
+  <div id="deliveries_chart_div" style="width: 100%; height: 1000px;"></div>
+</body>
+
+</html>
