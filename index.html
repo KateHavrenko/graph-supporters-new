@@ -36,6 +36,25 @@
       background-color: #3C88F4;
       position: relative;
     }
+
+    .progress .tooltiptext {
+      visibility: hidden;
+      background-color: #2342ab;
+      color: #fff;
+      text-align: center;
+      padding: 5px 10px;
+      border-radius: 4px;
+      position: absolute;
+      z-index: 1;
+      top: -25px;
+      right: 0;
+      opacity: 0.8
+    }
+
+    /* Show the tooltip text when you mouse over the tooltip container */
+    .progress:hover .tooltiptext {
+      visibility: visible;
+    }
   </style>
   <script type="text/javascript">
 
@@ -89,12 +108,18 @@
         medQuantity.appendChild(medQuantityName);
         medQuantity.classList.add("value-element")
 
+        const medPrice = document.createElement("span");
+        const medPriceName = document.createTextNode(element.c[2].f);
+        medPrice.appendChild(medPriceName);
+        medPrice.classList.add("tooltiptext");
+
 
         const content = document.getElementById("content-table");
 
         progressBar.appendChild(medElement);
         progressBar.appendChild(progress);
         progress.appendChild(medQuantity);
+        progress.appendChild(medPrice);
         progressBarContainer.appendChild(progressBar);
       })
     }
