@@ -28,11 +28,11 @@
 
     .progress-bar .name-element {
       z-index: 1;
-      margin-bottom: 5px;
+      margin-bottom: 2px;
     }
 
     .progress {
-      height: 30px;
+      height: 25px;
       border-radius: 4px;
       background-color: #3C88F4;
       position: relative;
@@ -41,14 +41,14 @@
 
     .progress .tooltiptext {
       visibility: hidden;
-      background-color: #2342ab;
-      color: #fff;
+      border: 1px solid;
+      /* color: #fff; */
       text-align: center;
       padding: 5px 10px;
       border-radius: 4px;
       position: absolute;
       z-index: 1;
-      top: -25px;
+      top: -30px;
       right: -10px;
       opacity: 0.8
     }
@@ -56,6 +56,12 @@
     /* Show the tooltip text when you mouse over the tooltip container */
     .progress:hover .tooltiptext {
       visibility: visible;
+    }
+
+    .progress:hover {
+      -webkit-box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.75);
+      box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.75);
     }
 
     #current-date {
@@ -92,9 +98,9 @@
       const currentDate = new Date();
 
       const day = currentDate.getDate();
-      const month = currentDate.getMonth() + 1;
+      const month = currentDate.toLocaleString('default', { month: 'long' });
       const year = currentDate.getFullYear();
-      const formattedDate = `${day}.${month}.${year}`;
+      const formattedDate = `${month} ${day}, ${year}`;
       const currentDateContainer = document.getElementById("current-date");
       currentDateContainer.innerText = `By ${formattedDate}`
     }
@@ -129,7 +135,7 @@
         medQuantity.classList.add("value-element")
 
         const medPrice = document.createElement("span");
-        const medPriceName = document.createTextNode(element.c[2].f);
+        const medPriceName = document.createTextNode(`Value: ${element.c[2].f}`);
         medPrice.appendChild(medPriceName);
         medPrice.classList.add("tooltiptext");
 
