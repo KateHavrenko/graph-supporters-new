@@ -2,6 +2,7 @@
 <html>
 
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Supporters UA</title>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <style>
@@ -55,9 +56,18 @@
     .progress:hover .tooltiptext {
       visibility: visible;
     }
+
+    #current-date {
+      text-align: center;
+      color: #ff830f;
+      font-family: Arial;
+      font-size: 16px;
+    }
   </style>
   <script type="text/javascript">
-
+    if (document.readyState === "complete") {
+      // Fully loaded!
+    }
 
     function fetchData() {
       const queryString = encodeURIComponent('SELECT A, B, E LIMIT 20');
@@ -77,15 +87,24 @@
         });
     }
 
+    function getCurrentDate() {
+      const currentDate = new Date();
+
+      const day = currentDate.getDate();
+      const month = currentDate.getMonth() + 1;
+      const year = currentDate.getFullYear();
+      const formattedDate = `${day}.${month}.${year}`;
+      const currentDateContainer = document.getElementById("current-date");
+      currentDateContainer.innerText = `By ${formattedDate}`
+    }
+
     async function createProgressBars() {
       const data = await fetchData();
-      console.log(data, 'data')
+      const progressBarContainer = document.getElementById("progress-bar-container");
+      getCurrentDate()
       const maxValue = data.table.rows[0].c[1].v;
 
       data.table.rows.map((element) => {
-        console.log(element)
-
-        const progressBarContainer = document.getElementById("progress-bar-container");
 
         const progressBar = document.createElement("div");
         progressBar.classList.add("progress-bar");
@@ -113,9 +132,6 @@
         medPrice.appendChild(medPriceName);
         medPrice.classList.add("tooltiptext");
 
-
-        const content = document.getElementById("content-table");
-
         progressBar.appendChild(medElement);
         progressBar.appendChild(progress);
         progress.appendChild(medQuantity);
@@ -129,6 +145,7 @@
 </head>
 
 <body>
+  <div id="current-date"></div>
   <div id="progress-bar-container"></div>
 </body>
 
