@@ -117,8 +117,6 @@
         let widthPct = `${element.c[1].v / maxValue * 100}%`;
         progress.style.width = widthPct;
 
-        console.log(element.c[1].f, 'width')
-
         const medElement = document.createElement("p");
         const medElementName = document.createTextNode(element.c[0].v);
         medElement.appendChild(medElementName);
